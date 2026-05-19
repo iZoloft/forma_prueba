@@ -46,3 +46,69 @@
 
 # Si el usuario desea asignar estaciones, se debe validar que haya suficiente capacidad dispo-nible. En caso de que no haya suficientes, debe informarse al usuario. La opción 4 debe mostrar el total de asignaciones realizadas durante la sesión (contador separado). El progra-ma debe repetirse hasta que el usuario elija salir.
 
+import os, time
+os.system("cls")
+
+estaciones_disponibles = 25
+historial_uso = 0
+historial_liberar = 0
+historial_asignar = 0
+acceso = True
+
+while acceso:
+    print("=== Menú Principal ===")
+    print("1. Estaciones Disponibles")
+    print("2. Asignar Estación")
+    print("3. Liberar Estación")
+    print("4. Historial de uso")
+    print("5. Salir")
+    try:
+        opcion = int(input("Ingrese opción \n"))
+        if opcion == 1:
+            os.system("cls")
+            print("1. Estaciones Disponibles")
+            print(f"Las estaciones disponibles son {estaciones_disponibles}")
+            time.sleep(2)
+        elif opcion == 2:
+            os.system("cls")
+            print("2. Asignar Estación")
+            while True:
+                asignar = int(input("Cuantas estaciones desea asignar?\n"))
+                if asignar <= 0:
+                    print("Valor debe ser mayor a 0")
+                elif asignar > estaciones_disponibles:
+                    print("No hay suficientes estaciones")
+                else:
+                    estaciones_disponibles = estaciones_disponibles - asignar
+                    historial_uso = historial_uso + 1
+                    historial_asignar = historial_asignar + asignar 
+                    break
+        elif opcion == 3:
+            os.system("cls")
+            print("3. Liberar Estación")
+            while True:
+                liberar = int(input("Cuantas estaciones desea liberar?\n"))
+                if liberar <= 0:
+                    print("Valor debe ser mayor a 0")
+                elif (estaciones_disponibles + liberar) > 25:
+                    print("No puedes liberar mas estaciones de las que hay")
+                else:
+                    estaciones_disponibles = estaciones_disponibles + liberar
+                    historial_uso = historial_uso + 1
+                    historial_liberar = historial_asignar + liberar
+                    break
+        elif opcion == 4:
+            os.system("cls")
+            print(f"Se han asignado {historial_asignar} estaciones")
+            print(f"Se han liberado {historial_liberar} estaciones")
+            print(f"Se han usado {historial_uso} peticiones para estaciones")
+            time.sleep(3)
+        elif opcion == 5:
+            os.system("cls")
+            print("Gracias por utilizar nuestro software, hasta la próxima.")
+            acceso = False
+        else:
+            os.system("cls")
+            print("Debes colocar una opción válida")
+    except:
+        print("Valor debe ser numérico")

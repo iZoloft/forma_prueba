@@ -45,32 +45,35 @@
 contador_estrategico = 0
 contador_tactico = 0
 cont_proyectos = 0
-acceso = True
 
-while acceso:
+while True:
     try:
-        proyectos = int(input("Ingrese la cantidad de proyectos a realizar: \n"))
-        if proyectos <= 0:
-            print("Valor debe ser mayor a 0")
+        proyectos = 0
+        while proyectos <= 0:
+            proyectos = int(input("Ingrese la cantidad de proyectos a realizar: \n"))
+            if proyectos <= 0:
+                print("Valor debe ser mayor a 0")
         while cont_proyectos < proyectos:
             nom_proyecto = ""
-            while len(nom_proyecto) <=6:
+            presupuesto_proyecto = 0
+            while len(nom_proyecto) < 6 or " " in nom_proyecto:
                 nom_proyecto = input("Ingrese el nombre de su proyecto: \n")
-                if len(nom_proyecto) <= 6:
-                    print("Nombre del proyecto debe tener almenos 6 carácteres")
-            presupuesto_proyecto = int(input("Ingrese presupuesto del proyecto: \n$ "))
+                if len(nom_proyecto) <  6 or " " in nom_proyecto:
+                    print("Nombre del proyecto debe tener almenos 6 carácteres sin espacio")
+            presupuesto_proyecto = 0
             while presupuesto_proyecto <= 0:
-                print("Presupuesto debe ser entero positivo")
+                presupuesto_proyecto = int(input("Ingrese presupuesto del proyecto: \n$ "))
+                if presupuesto_proyecto <= 0:
+                    print("Presupuesto debe ser entero positivo")
             if presupuesto_proyecto > 80000:
-                contador_estrategico = +1
-                cont_proyectos = +1
-            elif presupuesto_proyecto > 0 and presupuesto_proyecto < 80000:
-                contador_tactico = +1
-                cont_proyectos = +1
+                contador_estrategico = contador_estrategico +1
+                cont_proyectos = cont_proyectos +1
+            elif presupuesto_proyecto > 0 and presupuesto_proyecto <= 80000:
+                contador_tactico = contador_tactico +1
+                cont_proyectos = cont_proyectos +1
             else:
                 print("Valor debe ser positivo entero")
-            if cont_proyectos == proyectos:
-                acceso = False
         print(f"La empresa cuenta con {contador_estrategico} Proyectos Estratégicos y {contador_tactico} Proyectos Tácticos. Ejecución Autorizada")
+        break
     except:
         print("Valor debe ser numérico")
