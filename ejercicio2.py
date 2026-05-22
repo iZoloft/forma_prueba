@@ -90,7 +90,7 @@ while acceso:
                 liberar = int(input("Cuantas estaciones desea liberar?\n"))
                 if liberar <= 0:
                     print("Valor debe ser mayor a 0")
-                elif (estaciones_disponibles + liberar) > 25:
+                elif (estaciones_disponibles + liberar) > estaciones_disponibles:
                     print("No puedes liberar mas estaciones de las que hay")
                 else:
                     estaciones_disponibles = estaciones_disponibles + liberar
